@@ -17,6 +17,9 @@ def response():
 			log("initializing load balancer with config: %s"%(options.cfg))
 			options.update("override_redirect", not options.redirect)
 			startreverseproxy(options)
+			if options.cert:
+				log("starting SSL redirect (80->443)")
+				startreverseproxy(options.sslredir)
 		setmem("swarm", {
 			"proxying": True
 		})
