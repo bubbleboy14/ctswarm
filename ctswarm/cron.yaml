@@ -1,0 +1,4 @@
+cron:
+- description: db diff propagation
+  url: /cronswarm
+  schedule: every 2 minutes
