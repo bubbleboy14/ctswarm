@@ -10,10 +10,10 @@ def response():
 	if options.cfg:
 		log("initializing load balancer with config: %s"%(options.cfg))
 		options.update("override_redirect", not options.redirect)
-		startreverseproxy(options)
+		startreverseproxy(options, False)
 		if options.cert:
 			log("starting SSL redirect (80->443)")
-			startreverseproxy(options.sslredir)
+			startreverseproxy(options.sslredir, False)
 	log("load balancer initialized")
 
 respond(response)
