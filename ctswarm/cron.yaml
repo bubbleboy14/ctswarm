@@ -2,3 +2,7 @@ cron:
 - description: db diff propagation
   url: /cronswarm
   schedule: every 2 minutes
+
+- description: load balancer
+  url: /cronbalance
+  schedule: on start

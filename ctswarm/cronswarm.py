@@ -1,7 +1,6 @@
 from datetime import datetime, timedelta
-from dez.http.reverseproxy import startreverseproxy
-from cantools.web import respond, getmem, setmem
 from cantools.scripts.migrate import load
+from cantools.web import respond
 from cantools.util import log
 from cantools import config
 from model import *
@@ -9,20 +8,6 @@ from model import *
 def response():
 	log("initiating cronswarm", important=True)
 	cutoff = datetime.now() - timedelta(seconds=config.ctswarm.interval)
-	swarmopts = getmem("swarm")
-	if not swarmopts: # later check for specific things...
-		log("first run! checking for load balancer configuration...")
-		options = config.ctswarm.revolver
-		if options.cfg:
-			log("initializing load balancer with config: %s"%(options.cfg))
-			options.update("override_redirect", not options.redirect)
-			startreverseproxy(options)
-			if options.cert:
-				log("starting SSL redirect (80->443)")
-				startreverseproxy(options.sslredir)
-		setmem("swarm", {
-			"proxying": True
-		})
 	if config.ctswarm.peers:
 		for modname, schema in db.get_schema().items():
 			if "modified" in schema:
