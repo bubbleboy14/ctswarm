@@ -23,15 +23,16 @@ def response():
 		setmem("swarm", {
 			"proxying": True
 		})
-	for modname, schema in db.get_schema().items():
-		if "modified" in schema:
-			for (host, port) in config.ctswarm.peers.map(lambda x : x.split(".")):
-				load(host, port, db.session, {
-					"modified": {
-						"value": cutoff,
-						"comparator": ">="
-					}
-				})
+	if config.ctswarm.peers:
+		for modname, schema in db.get_schema().items():
+			if "modified" in schema:
+				for (host, port) in config.ctswarm.peers.map(lambda x : x.split(".")):
+					load(host, port, db.session, {
+						"modified": {
+							"value": cutoff,
+							"comparator": ">="
+						}
+					})
 	log("cronswarm complete")
 
 respond(response)
