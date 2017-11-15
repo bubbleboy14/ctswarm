@@ -1,5 +1,5 @@
 copies = {
-	".": ["cron.yaml", "cronswarm.py"]
+	".": ["cron.yaml", "cronswarm.py", "cronbalance.py"]
 }
 cfg = {
     "peers": [],
