@@ -4,6 +4,7 @@ copies = {
 cfg = {
     "peers": [],
     "interval": 5,
+    "memcache": [],
     "revolver": {
     	"port": 80,
     	"cfg": None,

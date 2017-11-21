@@ -1,19 +1,31 @@
 from dez.http.reverseproxy import startreverseproxy
-from cantools.web import respond
+from cantools.web import respond, post
+from cantools.hooks import memhook
 from cantools.util import log
 from cantools import config
 
+def memswarm(params):
+	log("synchronizing memcache", important=True)
+	params["nohook"] = True
+	for peer in config.ctswarm.memcache:
+		host, port = peer.split(":")
+		post(host, "/_memcache", port, params, ctjson=True)
+
 def response():
-	log("initiating cronbalance", important=True)
-	log("checking for load balancer configuration...")
-	options = config.ctswarm.revolver
-	if options.cfg:
-		log("initializing load balancer with config: %s"%(options.cfg))
-		options.update("override_redirect", not options.redirect)
-		startreverseproxy(options, False)
-		if options.cert:
-			log("starting SSL redirect (80->443)")
-			startreverseproxy(options.sslredir, False)
-	log("load balancer initialized")
+	log("initiating cronswarm", important=True)
+	cfg = config.ctswarm
+	revolver = cfg.revolver
+	if revolver.cfg:
+		log("initializing load balancer with config: %s"%(revolver.cfg), 1)
+		revolver.update("override_redirect", not revolver.redirect)
+		startreverseproxy(revolver, False)
+		if revolver.cert:
+			log("starting SSL redirect (80->443)", 2)
+			startreverseproxy(revolver.sslredir, False)
+		log("load balancer initialized", 1)
+	if cfg.memcache:
+		log("initializing memswarm", 1)
+		memhook.register(memswarm)
+	log("cronswarm initialized")
 
 respond(response)
