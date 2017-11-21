@@ -1,8 +1,8 @@
 cron:
 - description: db diff propagation
-  url: /cronswarm
+  url: /cronswarmdb
   schedule: every 2 minutes
 
-- description: load balancer
-  url: /cronbalance
+- description: load balancer and memcache
+  url: /cronswarm
   schedule: on start
