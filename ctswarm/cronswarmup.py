@@ -14,7 +14,7 @@ Oops!
 def response():
 	log("cronswarm (up)", important=True)
 	down = []
-	for addr in config.ctswarm.monitor:
+	for addr in config.ctswarm.monitor.split("|"):
 		proto = "http"
 		host = addr
 		port = 80
