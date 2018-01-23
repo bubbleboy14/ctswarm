@@ -21,7 +21,7 @@ The aim of this plugin is to simplify the deployment and administration of cloud
     copies = {
     	".": ["cron.yaml"]
     }
-    syms: {
+    syms = {
         ".": ["cronswarm.py", "cronswarmdb.py", "cronswarmup.py"]
     }
     cfg = {
