@@ -1,7 +1,7 @@
 copies = {
 	".": ["cron.yaml"]
 }
-syms: {
+syms = {
     ".": ["cronswarm.py", "cronswarmdb.py", "cronswarmup.py"]
 }
 cfg = {
