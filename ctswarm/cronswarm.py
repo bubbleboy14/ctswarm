@@ -7,7 +7,7 @@ from cantools import config
 def memswarm(params):
 	log("synchronizing memcache", important=True)
 	params["nohook"] = True
-	for peer in config.ctswarm.memcache:
+	for peer in config.ctswarm.memcache.split("|"):
 		host, port = peer.split(":")
 		post(host, "/_memcache", port, params, ctjson=True)
 
