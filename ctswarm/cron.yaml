@@ -1,4 +1,8 @@
 cron:
+- description: uptime monitor
+  url: /cronswarmup
+  schedule: every 10 minutes
+
 - description: db diff propagation
   url: /cronswarmdb
   schedule: every 2 minutes
