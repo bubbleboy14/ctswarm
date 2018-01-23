@@ -12,7 +12,7 @@ def memswarm(params):
 		post(host, "/_memcache", port, params, ctjson=True)
 
 def response():
-	log("initiating cronswarm", important=True)
+	log("initializing cronswarm", important=True)
 	cfg = config.ctswarm
 	revolver = cfg.revolver
 	if revolver.cfg:

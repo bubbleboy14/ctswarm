@@ -6,7 +6,7 @@ from cantools import config
 from model import *
 
 def response():
-	log("initiating cronswarm", important=True)
+	log("cronswarm (db)", important=True)
 	cutoff = datetime.now() - timedelta(seconds=config.ctswarm.db.interval)
 	if config.ctswarm.db.peers:
 		for modname, schema in db.get_schema().items():
@@ -18,6 +18,6 @@ def response():
 							"comparator": ">="
 						}
 					})
-	log("cronswarm complete")
+	log("cronswarm (db) complete")
 
 respond(response)
