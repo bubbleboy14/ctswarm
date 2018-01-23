@@ -2,8 +2,10 @@ copies = {
 	".": ["cron.yaml", "cronswarm.py", "cronbalance.py"]
 }
 cfg = {
-    "peers": [],
-    "interval": 5,
+    "db": {
+        "peers": [],
+        "interval": 120
+    },
     "memcache": [],
     "revolver": {
     	"port": 80,

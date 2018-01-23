@@ -7,11 +7,11 @@ from model import *
 
 def response():
 	log("initiating cronswarm", important=True)
-	cutoff = datetime.now() - timedelta(seconds=config.ctswarm.interval)
-	if config.ctswarm.peers:
+	cutoff = datetime.now() - timedelta(seconds=config.ctswarm.db.interval)
+	if config.ctswarm.db.peers:
 		for modname, schema in db.get_schema().items():
 			if "modified" in schema:
-				for (host, port) in config.ctswarm.peers.map(lambda x : x.split(".")):
+				for (host, port) in config.ctswarm.db.peers.map(lambda x : x.split(":")):
 					load(host, port, db.session, {
 						"modified": {
 							"value": cutoff,
