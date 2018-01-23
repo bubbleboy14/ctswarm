@@ -1,5 +1,8 @@
 copies = {
-	".": ["cron.yaml", "cronswarm.py", "cronbalance.py"]
+	".": ["cron.yaml"]
+}
+syms: {
+    ".": ["cronswarm.py", "cronswarmdb.py", "cronswarmup.py"]
 }
 cfg = {
     "db": {
@@ -7,6 +10,7 @@ cfg = {
         "interval": 120
     },
     "memcache": [],
+    "monitor": [],
     "revolver": {
     	"port": 80,
     	"cfg": None,
