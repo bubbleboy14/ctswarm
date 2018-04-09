@@ -29,6 +29,7 @@ def response():
 	if cfg.db.peers:
 		log("initializing db syncer", 1)
 		config.cache("remote admin password? ")
+		cfg.db.update("interval", int(cfg.db.interval))
 		peers = []
 		for p in cfg.db.peers.split("|"):
 			proto = "http"
@@ -42,6 +43,7 @@ def response():
 				port = 443
 			peers.append((host, port, proto))
 		cfg.db.update("peers", peers)
+		log("db syncer initialized", 1)
 	log("cronswarm initialized")
 
 respond(response)

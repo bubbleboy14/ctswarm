@@ -9,7 +9,7 @@ def response():
 	log("cronswarm (db)", important=True)
 	if config.ctswarm.db.peers:
 		cutoff = {
-			"value": datetime.now() - timedelta(seconds=int(config.ctswarm.db.interval)),
+			"value": datetime.now() - timedelta(seconds=config.ctswarm.db.interval),
 			"comparator": ">="
 		}
 		for modname, schema in db.get_schema().items():
