@@ -13,6 +13,7 @@ def memswarm(params):
 
 def response():
 	log("initializing cronswarm", important=True)
+	config.cache("remote admin password? ")
 	cfg = config.ctswarm
 	revolver = cfg.revolver
 	if revolver.cfg:

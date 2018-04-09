@@ -17,7 +17,7 @@ def response():
 							"value": cutoff,
 							"comparator": ">="
 						}
-					})
+					}, config.cache("remote admin password? "))
 	log("cronswarm (db) complete")
 
 respond(response)
