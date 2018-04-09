@@ -30,7 +30,7 @@ def response():
 	if down:
 		dz = "\r\n".join(down)
 		for contact in config.admin.contacts:
-			mail(to=contact, subject="Server(s) Unreachable", body=TMP%(dz,))
+			mail.send_mail(to=contact, subject="Server(s) Unreachable", body=TMP%(dz,))
 	log("cronswarm (up) complete")
 
 respond(response)
