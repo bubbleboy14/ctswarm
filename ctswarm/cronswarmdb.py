@@ -11,7 +11,7 @@ def response():
 	if config.ctswarm.db.peers:
 		for modname, schema in db.get_schema().items():
 			if "modified" in schema:
-				for (host, port) in config.ctswarm.db.peers.split("|").map(lambda x : x.split(":")):
+				for (host, port) in map(lambda x : x.split(":"), config.ctswarm.db.peers.split("|")):
 					load(host, port, db.session, {
 						"modified": {
 							"value": cutoff,
