@@ -22,7 +22,7 @@ def response():
 				continue
 			for (host, port, protocol) in config.ctswarm.db.peers:
 				load_model(modname, host, port, db.session, filters,
-					protocol, config.cache("remote admin password? "))
+					protocol, config.cache("remote admin password? "), "edit")
 	log("cronswarm (db) complete")
 
 respond(response)
