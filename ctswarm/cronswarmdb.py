@@ -7,7 +7,7 @@ from model import *
 
 def response():
 	log("cronswarm (db)", important=True)
-	cutoff = datetime.now() - timedelta(seconds=config.ctswarm.db.interval)
+	cutoff = datetime.now() - timedelta(seconds=int(config.ctswarm.db.interval))
 	if config.ctswarm.db.peers:
 		for modname, schema in db.get_schema().items():
 			if "modified" in schema:
