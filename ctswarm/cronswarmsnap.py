@@ -9,7 +9,7 @@ def response():
 	if not os.path.exists("archive"):
 		log("creating archive directory")
 		os.mkdir("archive")
-	cmd("cp data.db %s"%(os.path.join("archive",
+	cmd('cp data.db "%s"'%(os.path.join("archive",
 		str(datetime.now()).rsplit(":", 1)[0]),))
 	log("cronswarm (snap) complete")
 
