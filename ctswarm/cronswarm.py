@@ -13,7 +13,6 @@ def memswarm(params):
 
 def response():
 	log("initializing cronswarm", important=True)
-	config.cache("remote admin password? ")
 	cfg = config.ctswarm
 	revolver = cfg.revolver
 	if revolver.cfg:
@@ -27,6 +26,22 @@ def response():
 	if cfg.memcache:
 		log("initializing memswarm", 1)
 		memhook.register(memswarm)
+	if cfg.db.peers:
+		log("initializing db syncer", 1)
+		config.cache("remote admin password? ")
+		peers = []
+		for p in cfg.db.peers.split("|"):
+			proto = "http"
+			port = 80
+			host = p
+			if "://" in p:
+				proto, host = p.split("://")
+			if ":" in host:
+				host, port = host.split(":")
+			elif proto == "https":
+				port = 443
+			peers.append((host, port, proto))
+		cfg.db.update("peers", peers)
 	log("cronswarm initialized")
 
 respond(response)

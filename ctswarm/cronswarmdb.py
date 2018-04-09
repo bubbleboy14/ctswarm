@@ -12,7 +12,6 @@ def response():
 			"value": datetime.now() - timedelta(seconds=int(config.ctswarm.db.interval)),
 			"comparator": ">="
 		}
-		peers = map(lambda x : x.split(":"), config.ctswarm.db.peers.split("|"))
 		for modname, schema in db.get_schema().items():
 			filters = {}
 			if "modified" in schema:
@@ -21,9 +20,9 @@ def response():
 				filters["date"] = cutoff
 			else:
 				continue
-			for (host, port) in peers:
+			for (host, port, protocol) in config.ctswarm.db.peers:
 				load_model(modname, host, port, db.session, filters,
-					config.cache("remote admin password? "))
+					protocol, config.cache("remote admin password? "))
 	log("cronswarm (db) complete")
 
 respond(response)
