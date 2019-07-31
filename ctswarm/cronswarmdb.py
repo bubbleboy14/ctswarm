@@ -12,7 +12,7 @@ def response():
 			"value": datetime.now() - timedelta(seconds=config.ctswarm.db.interval),
 			"comparator": ">="
 		}
-		for modname, schema in db.get_schema().items():
+		for modname, schema in list(db.get_schema().items()):
 			filters = {}
 			if "modified" in schema:
 				filters["modified"] = cutoff
