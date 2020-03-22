@@ -1,6 +1,3 @@
-copies = {
-	".": ["cron.yaml"]
-}
 syms = {
     ".": ["cronswarm.py", "cronswarmdb.py", "cronswarmup.py", "cronswarmsnap.py"]
 }
