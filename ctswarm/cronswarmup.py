@@ -22,6 +22,8 @@ def response():
 			proto, host = addr.split("://")
 		if ":" in host:
 			host, port = host.split(":")
+		elif proto == "https":
+			port = 443
 		try:
 			fetch(host, port=port, protocol=proto)
 		except:
