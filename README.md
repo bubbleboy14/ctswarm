@@ -1,5 +1,5 @@
 # ctswarm
-The aim of this plugin is to simplify the deployment and administration of cloud based web services, the magic of which chiefly consists of monitoring, data synchronization, and load balancing.
+The aim of this plugin is to simplify the deployment and administration of cloud based web services, the magic of which chiefly consists of monitoring, data synchronization, load balancing, and automated archival.
 
 ## monitor
  - ping peers (cfg.ctswarm.monitor[])
@@ -14,15 +14,13 @@ The aim of this plugin is to simplify the deployment and administration of cloud
 ## revolver (drp-based load balancer!!!)
  - regular traffic is proxied as specified
  - media/big files are auto-302ed as necessary
-
+## snapper
+ - back up / archive data.db
 
 # Back (Init Config)
 
-    copies = {
-    	".": ["cron.yaml"]
-    }
     syms = {
-        ".": ["cronswarm.py", "cronswarmdb.py", "cronswarmup.py"]
+        ".": ["cronswarm.py", "cronswarmdb.py", "cronswarmup.py", "cronswarmsnap.py"]
     }
     cfg = {
         "db": {
@@ -37,7 +35,7 @@ The aim of this plugin is to simplify the deployment and administration of cloud
         	"key": None,
         	"cert": None,
         	"verbose": False,
-        	"redirect": True,
+        	"redirect": False,
         	"sslredir": {
         		"port": 80,
         		"verbose": False,
@@ -45,3 +43,4 @@ The aim of this plugin is to simplify the deployment and administration of cloud
         	}
         }
     }
+    
