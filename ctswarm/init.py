@@ -14,7 +14,7 @@ cfg = {
     	"key": None,
     	"cert": None,
     	"verbose": False,
-    	"redirect": True,
+    	"redirect": False,
     	"sslredir": {
     		"port": 80,
     		"verbose": False,
