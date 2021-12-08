@@ -1,3 +1,4 @@
+import os
 from datetime import datetime
 from cantools.util import log, cmd, read, indir
 
