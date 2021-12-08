@@ -1,5 +1,10 @@
 syms = {
-    ".": ["cronswarm.py", "cronswarmdb.py", "cronswarmup.py", "cronswarmsnap.py"]
+    ".": ["cronswarm.py", "cronswarmdb.py", "cronswarmup.py", "cronswarmsnap.py", "_swarm.py"],
+    "js": ["swarm"],
+    "html": ["swarm"]
+}
+routes = {
+    "/_swarm": "_swarm.py"
 }
 cfg = {
     "db": {
