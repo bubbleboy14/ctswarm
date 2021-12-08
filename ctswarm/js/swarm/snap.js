@@ -27,7 +27,7 @@ swarm.snap.Snapper = CT.Class({
 			if (_.snaps.includes(aname))
 				return alert("current snapshot already saved as " + aname);
 			_.snaps.push(aname);
-			refresh();
+			refresh(_.snaps);
 		}, "snap");
 	},
 	refresh: function(snaps) {
