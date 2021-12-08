@@ -25,7 +25,7 @@ def response():
 		elif proto == "https":
 			port = 443
 		try:
-			fetch(host, port=port, protocol=proto, fakeua=True)
+			fetch(host, port=port, timeout=3, protocol=proto, fakeua=True)
 		except:
 			log("SERVER DOWN: %s"%(addr,))
 			down.append(addr)
