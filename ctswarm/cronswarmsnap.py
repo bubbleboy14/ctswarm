@@ -1,7 +1,7 @@
 from cantools.web import respond
 from cantools.util import log
 from cantools import config
-from cronswarm.util import snap
+from ctswarm.util import snap
 
 def response():
 	log("cronswarm (snap)", important=True)
