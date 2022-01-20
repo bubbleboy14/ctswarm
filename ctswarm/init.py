@@ -13,6 +13,7 @@ cfg = {
     },
     "memcache": [],
     "monitor": [],
+    "montime": 8,
     "revolver": {
     	"port": 80,
     	"cfg": None,
