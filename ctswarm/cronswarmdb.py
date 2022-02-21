@@ -7,8 +7,7 @@ from model import *
 
 if config.ctswarm.db.tables:
 	schemas = {}
-	tables = config.ctswarm.db.tables.split("|")
-	for table in tables:
+	for table in config.ctswarm.db.tables:
 		schemas[table] = db.get_schema(table)
 else:
 	schemas = db.get_schema()
