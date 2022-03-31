@@ -29,8 +29,9 @@ def response():
 	if cfg.db.peers:
 		log("initializing db syncer", 1)
 		config.cache("remote admin password? ")
-		if cfg.db.tables:
-			cfg.db.update("tables", cfg.db.tables.split("|"))
+		for cname in ["tables", "firsts", "lasts"]:
+			if cfg.db[cname]:
+				cfg.db.update(cname, cfg.db[cname].split("|"))
 		cfg.db.update("interval", int(cfg.db.interval))
 		peers = []
 		for p in cfg.db.peers.split("|"):
