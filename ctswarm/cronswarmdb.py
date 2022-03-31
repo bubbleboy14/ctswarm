@@ -21,6 +21,8 @@ else:
 		schemas = modsche(dbcfg.firsts) + flfilt(schemas, dbcfg.firsts)
 	if dbcfg.lasts:
 		schemas = flfilt(schemas, dbcfg.lasts) + modsche(dbcfg.lasts)
+	if dbcfg.besides:
+		schemas = flfilt(schemas, dbcfg.besides)
 
 def response():
 	log("cronswarm (db)", important=True)
