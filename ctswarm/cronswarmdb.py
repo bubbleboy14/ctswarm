@@ -1,5 +1,5 @@
 from datetime import datetime, timedelta
-from cantools.scripts.migrate import load_model
+from cantools.scripts.migrate import load_model, blobificator
 from cantools.web import respond
 from cantools.util import log
 from cantools import config
@@ -23,6 +23,7 @@ else:
 		schemas = flfilt(schemas, dbcfg.lasts) + modsche(dbcfg.lasts)
 	if dbcfg.besides:
 		schemas = flfilt(schemas, dbcfg.besides)
+blobifier = blobificator(config.web.host, config.web.port, dbcfg.self)
 
 def response():
 	log("cronswarm (db)", important=True)
@@ -41,7 +42,7 @@ def response():
 				continue
 			for (host, port, protocol) in dbcfg.peers:
 				load_model(modname, host, port, db.session, filters,
-					protocol, config.cache("remote admin password? "), "edit")
+					protocol, config.cache("remote admin password? "), "edit", blobifier)
 	log("cronswarm (db) complete")
 
 respond(response)
