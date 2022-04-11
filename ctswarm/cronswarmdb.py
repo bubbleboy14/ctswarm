@@ -1,6 +1,6 @@
 from datetime import datetime, timedelta
 from cantools.scripts.migrate import load_model, blobificator
-from cantools.web import respond
+from cantools.web import respond, post
 from cantools.util import log
 from cantools import config
 from model import *
@@ -28,6 +28,8 @@ blobifier = blobificator(config.web.host, config.web.port, dbcfg.self)
 def response():
 	log("cronswarm (db)", important=True)
 	if dbcfg.peers:
+		pw = config.cache("remote admin password? ")
+		delivered = 0
 		cutoff = {
 			"value": datetime.now() - timedelta(seconds=dbcfg.interval),
 			"comparator": ">="
@@ -41,8 +43,15 @@ def response():
 			else:
 				continue
 			for (host, port, protocol) in dbcfg.peers:
-				load_model(modname, host, port, db.session, filters,
-					protocol, config.cache("remote admin password? "), "edit", blobifier)
+				delivered += load_model(modname, host, port, db.session,
+					filters, protocol, pw, "edits", blobifier)
+		if delivered:
+			log("delivered %s updates - clearing peer memcaches"%(delivered,))
+			for (host, port, protocol) in dbcfg.peers:
+				post(host, "/_memcache", port, {
+					"pw": pw,
+					"action": "clear"
+				}, protocol=protocol)
 	log("cronswarm (db) complete")
 
 respond(response)
