@@ -14,7 +14,7 @@ def flfilt(schemas, rmlist):
 	return list(filter(lambda i : i[0] not in rmlist, schemas))
 
 if dbcfg.tables:
-	schemas = modsche(dcfg.tables)
+	schemas = modsche(dbcfg.tables)
 else:
 	schemas = modsche(db.get_schema().keys())
 	if dbcfg.firsts:
