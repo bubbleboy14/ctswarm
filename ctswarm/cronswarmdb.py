@@ -28,10 +28,11 @@ blobifier = blobificator(config.web.host, config.web.port, dbcfg.self)
 def response():
 	log("cronswarm (db)", important=True)
 	if dbcfg.peers:
+		dbcfg.update("backlog", dbcfg.get("backlog", 0) + dbcfg.interval)
 		pw = config.cache("remote admin password? ")
 		delivered = 0
 		cutoff = {
-			"value": datetime.now() - timedelta(seconds=dbcfg.interval),
+			"value": datetime.now() - timedelta(seconds=dbcfg.backlog),
 			"comparator": ">="
 		}
 		for modname, schema in schemas:
@@ -52,6 +53,7 @@ def response():
 					"pw": pw,
 					"action": "clear"
 				}, protocol=protocol)
+		dbcfg.update("backlog", 0)
 	log("cronswarm (db) complete")
 
 respond(response)
