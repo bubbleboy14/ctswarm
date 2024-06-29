@@ -28,7 +28,7 @@ blobifier = blobificator(config.web.host, config.web.port, dbcfg.self)
 def response():
 	if not dbcfg.peers:
 		return log("cronswarm (db) aborted - no peers")
-	dbcfg.update("backlog", dbcfg.get("backlog", 0) + dbcfg.interval)
+	dbcfg.update("backlog", dbcfg.get("backlog", 0) + int(dbcfg.interval))
 	log("cronswarm (db) @ %s"%(dbcfg.backlog,), important=True)
 	pw = config.cache("remote admin password? ")
 	delivered = 0
