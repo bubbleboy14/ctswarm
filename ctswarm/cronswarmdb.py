@@ -45,7 +45,7 @@ def response():
 		else:
 			continue
 		for (host, port, protocol) in dbcfg.peers:
-			delivered += load_model(modname, host, port, db.session,
+			delivered += load_model(modname, host, port, None,
 				filters, protocol, pw, "edits", blobifier)
 	if delivered:
 		log("delivered %s updates - clearing peer memcaches"%(delivered,))
